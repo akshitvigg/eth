@@ -5,11 +5,14 @@ import {
   useAccount,
   useBalance,
   useConnect,
+  useSendTransaction,
   WagmiProvider,
 } from "wagmi";
 import "./App.css";
 import { mainnet } from "viem/chains";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { useRef } from "react";
+import { parseEther } from "viem";
 
 export const config = createConfig({
   chains: [mainnet],
@@ -26,6 +29,7 @@ function App() {
         <QueryClientProvider client={queryClient}>
           <WalletConnect />
           <MyAddress />
+          <SendEth />
         </QueryClientProvider>
       </WagmiProvider>
     </div>
@@ -40,6 +44,29 @@ function MyAddress() {
     <div>
       {address} <br />
       {balance?.data?.value}
+    </div>
+  );
+}
+
+function SendEth() {
+  const { data: hash, sendTransaction } = useSendTransaction();
+  const toRef = useRef();
+  const amountRef = useRef();
+
+  async function ethsend() {
+    sendTransaction({
+      to: toRef.current.value,
+      value: amountRef.current.value,
+    });
+    console.log(toRef.current.value + amountRef.current.value);
+  }
+
+  return (
+    <div>
+      <input type="text" ref={toRef} placeholder="to" />
+      <input type="text" ref={amountRef} placeholder="amount" />
+      <button onClick={ethsend}>Send</button>
+      {hash}
     </div>
   );
 }
