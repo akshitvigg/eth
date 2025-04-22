@@ -5,6 +5,7 @@ import { mainnet } from "viem/chains";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import WalletConnect from "./components/WalletConnect";
 import SendEth from "./components/sendeth";
+import ShowInfo from "./components/showbalance";
 
 export const config = new createConfig({
   chains: [mainnet],
@@ -21,6 +22,7 @@ function App() {
         <QueryClientProvider client={queryClient}>
           <WalletConnect />
           <SendEth />
+          <ShowInfo />
         </QueryClientProvider>
       </WagmiProvider>
     </div>
