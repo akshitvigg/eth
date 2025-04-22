@@ -1,4 +1,12 @@
-import { createConfig, http, injected, useConnect, WagmiProvider } from "wagmi";
+import {
+  createConfig,
+  http,
+  injected,
+  useAccount,
+  useBalance,
+  useConnect,
+  WagmiProvider,
+} from "wagmi";
 import "./App.css";
 import { mainnet } from "viem/chains";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -17,8 +25,21 @@ function App() {
       <WagmiProvider config={config}>
         <QueryClientProvider client={queryClient}>
           <WalletConnect />
+          <MyAddress />
         </QueryClientProvider>
       </WagmiProvider>
+    </div>
+  );
+}
+
+function MyAddress() {
+  const { address } = useAccount();
+  const balance = useBalance({ address });
+
+  return (
+    <div>
+      {address} <br />
+      {balance?.data?.value}
     </div>
   );
 }
