@@ -12,7 +12,6 @@ import "./App.css";
 import { mainnet } from "viem/chains";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useRef } from "react";
-import { parseEther } from "viem";
 
 export const config = createConfig({
   chains: [mainnet],
@@ -40,9 +39,12 @@ function MyAddress() {
   const { address } = useAccount();
   const balance = useBalance({ address });
 
+  function copyAddress() {
+    navigator.clipboard.writeText(address);
+  }
   return (
     <div>
-      {address} <br />
+      {address} <button onClick={copyAddress}>copy</button> <br />
       {balance?.data?.value}
     </div>
   );
