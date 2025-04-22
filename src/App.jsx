@@ -17,12 +17,14 @@ export const queryClient = new QueryClient();
 
 function App() {
   return (
-    <div>
+    <div className=" flex items-center  justify-center min-h-screen bg-zinc-900 text-white">
       <WagmiProvider config={config}>
         <QueryClientProvider client={queryClient}>
-          <WalletConnect />
-          <SendEth />
-          <ShowInfo />
+          <div>
+            <WalletConnect />
+            <SendEth />
+            <ShowInfo />
+          </div>
         </QueryClientProvider>
       </WagmiProvider>
     </div>

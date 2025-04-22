@@ -10,7 +10,11 @@ function ShowInfo() {
 
   return (
     <div>
-      {address} <button onClick={copyAddress}>copy </button> <br />
+      {address}
+      <button className=" bg-red-400" onClick={copyAddress}>
+        copy
+      </button>
+      <br />
       {balance?.data?.value}
     </div>
   );

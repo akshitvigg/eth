@@ -6,7 +6,11 @@ function WalletConnect() {
   return (
     <div>
       {connectors.map((connector) => (
-        <button onClick={() => connect({ connector })} key={connector.id}>
+        <button
+          className=" bg-gray-700 p-3 mr-3 rounded-2xl "
+          onClick={() => connect({ connector })}
+          key={connector.id}
+        >
           {connector.name}
         </button>
       ))}
