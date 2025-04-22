@@ -1,9 +1,10 @@
 import { createClient, http } from "viem";
 import "./App.css";
-import { createConfig, injected } from "wagmi";
+import { createConfig, injected, WagmiProvider } from "wagmi";
 import { mainnet } from "viem/chains";
-import { QueryClient } from "@tanstack/react-query";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import WalletConnect from "./components/WalletConnect";
+import SendEth from "./components/sendeth";
 
 export const config = new createConfig({
   chains: [mainnet],
@@ -16,7 +17,12 @@ export const queryClient = new QueryClient();
 function App() {
   return (
     <div>
-      <WalletConnect />
+      <WagmiProvider config={config}>
+        <QueryClientProvider client={queryClient}>
+          <WalletConnect />
+          <SendEth />
+        </QueryClientProvider>
+      </WagmiProvider>
     </div>
   );
 }
