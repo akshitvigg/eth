@@ -11,7 +11,7 @@ function ShowInfo() {
   return (
     <div>
       {address}
-      <button className=" bg-red-400" onClick={copyAddress}>
+      <button className="   bg-yellow-400" onClick={copyAddress}>
         copy
       </button>
       <br />
